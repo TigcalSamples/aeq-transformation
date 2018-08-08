@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">AEQ Transformation</string>
+
+    <string name="transformers_list_empty">Add Transformers for the battle.</string>
+
+    <string name="battle_start">Start Battle</string>
 </resources>
