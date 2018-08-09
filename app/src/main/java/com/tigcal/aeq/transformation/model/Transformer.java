@@ -1,10 +1,21 @@
 package com.tigcal.aeq.transformation.model;
 
+import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 public class Transformer implements Comparable<Transformer> {
     private static final String SPECIAL_OPTIMUS = "Optimus Prime";
     private static final String SPECIAL_PREDAKING = "Predaking";
+
+    @IntDef({Team.AUTOBOTS, Team.DECEPTICONS})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface Team {
+        int AUTOBOTS = 0;
+        int DECEPTICONS = 1;
+    }
 
     private String name;
     private int strength;
@@ -16,6 +27,8 @@ public class Transformer implements Comparable<Transformer> {
     private int firepower;
     private int skill;
     private int overallRating;
+    @Team
+    private int team;
     private boolean alive = true;
 
     public String getName() {
@@ -104,6 +117,18 @@ public class Transformer implements Comparable<Transformer> {
 
     public boolean isSpecial() {
         return SPECIAL_OPTIMUS.equals(name) || SPECIAL_PREDAKING.equals(name);
+    }
+
+    public void setTeam(@Team int team) {
+        this.team = team;
+    }
+
+    public boolean isAutobot() {
+        return this.team == Team.AUTOBOTS;
+    }
+
+    public boolean isDecepticon() {
+        return this.team == Team.DECEPTICONS;
     }
 
     @Override
