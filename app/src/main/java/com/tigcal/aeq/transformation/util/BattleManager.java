@@ -37,6 +37,10 @@ public class BattleManager {
         } else if (decepticon.getCourage() - autobot.getCourage() >= 4
                 && decepticon.getStrength() - autobot.getStrength() >= 3) {
             return Result.DECEPTICON_WINS;
+        } else if (autobot.getSkill() - decepticon.getSkill() >= 3) {
+            return Result.AUTOBOT_WINS;
+        } else if (decepticon.getSkill() - autobot.getSkill() >= 3) {
+            return Result.DECEPTICON_WINS;
         }
 
         return Result.DRAW;//FIXME

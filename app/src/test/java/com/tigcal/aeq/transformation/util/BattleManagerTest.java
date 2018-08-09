@@ -53,4 +53,15 @@ public class BattleManagerTest {
     }
 
 
+    @Test
+    public void skilledBy3Wins() {
+        Transformer autobot = new Transformer();
+        autobot.setName("Bumblebee");
+        autobot.setSkill(2);
+        Transformer decepticon = new Transformer();
+        decepticon.setName("Soundwave");
+        decepticon.setSkill(6);
+        int battleResult = BattleManager.startBattle(autobot, decepticon);
+        assertEquals(BattleManager.Result.DECEPTICON_WINS, battleResult);
+    }
 }
