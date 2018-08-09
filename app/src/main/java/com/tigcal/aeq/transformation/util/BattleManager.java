@@ -41,8 +41,12 @@ public class BattleManager {
             return Result.AUTOBOT_WINS;
         } else if (decepticon.getSkill() - autobot.getSkill() >= 3) {
             return Result.DECEPTICON_WINS;
+        } else if (autobot.getOverallRating() > decepticon.getOverallRating()) {
+            return Result.AUTOBOT_WINS;
+        } else if (decepticon.getOverallRating() > autobot.getOverallRating()) {
+            return Result.DECEPTICON_WINS;
+        } else {
+            return Result.DRAW;
         }
-
-        return Result.DRAW;//FIXME
     }
 }

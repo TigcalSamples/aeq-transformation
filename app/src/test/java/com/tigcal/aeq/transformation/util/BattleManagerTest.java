@@ -64,4 +64,46 @@ public class BattleManagerTest {
         int battleResult = BattleManager.startBattle(autobot, decepticon);
         assertEquals(BattleManager.Result.DECEPTICON_WINS, battleResult);
     }
+
+    @Test
+    public void higherOverallRatingWins() {
+        Transformer autobot = new Transformer();
+        autobot.setName("Bumblebee");
+        autobot.setStrength(1);
+        autobot.setIntelligence(2);
+        autobot.setSpeed(3);
+        autobot.setEndurance(4);
+        autobot.setFirepower(5);
+        Transformer decepticon = new Transformer();
+        decepticon.setName("Soundwave");
+        decepticon.setStrength(5);
+        decepticon.setIntelligence(6);
+        decepticon.setSpeed(7);
+        decepticon.setEndurance(8);
+        decepticon.setFirepower(9);
+        int battleResult = BattleManager.startBattle(autobot, decepticon);
+        assertEquals(BattleManager.Result.DECEPTICON_WINS, battleResult);
+    }
+
+    @Test
+    public void tiedBattle() {
+        Transformer autobot = new Transformer();
+        autobot.setName("Bumblebee");
+        autobot.setStrength(1);
+        autobot.setIntelligence(2);
+        autobot.setSpeed(3);
+        autobot.setEndurance(4);
+        autobot.setFirepower(5);
+        Transformer decepticon = new Transformer();
+        decepticon.setName("Soundwave");
+        decepticon.setStrength(1);
+        decepticon.setIntelligence(2);
+        decepticon.setSpeed(3);
+        decepticon.setEndurance(4);
+        decepticon.setFirepower(5);
+        int battleResult = BattleManager.startBattle(autobot, decepticon);
+        assertEquals(BattleManager.Result.DRAW, battleResult);
+    }
+
+
 }
