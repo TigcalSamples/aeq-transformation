@@ -26,8 +26,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO add transformer
-                Snackbar.make(recyclerView, "TODO: Add Transformer", Snackbar.LENGTH_SHORT).show();
+                displayAddTransformerDialog();
             }
         });
 
@@ -52,4 +51,10 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    private void displayAddTransformerDialog() {
+        AddTransformerFragment addTransformerDialog = new AddTransformerFragment();
+        addTransformerDialog.show(getSupportFragmentManager(), getString(R.string.transformer_add));
+    }
+
 }
