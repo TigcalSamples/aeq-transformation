@@ -17,9 +17,14 @@
     <string name="transformer_add">Add A Transformer</string>
     <string name="transformer_add_button">Add</string>
     <string name="transformer_add_close">Close</string>
+    <string name="transformer_add_error_no_name">Please provide the transformer name</string>
+    <string name="transformer_add_success">%s was added to the list</string>
     <string name="transformer_criteria_min">0</string>
     <string name="transformer_icon">Transformers Icon</string>
     <string name="transformer_remove">Remove Transformer</string>
+
+    <string name="transformer_team_autobots">Autobots</string>
+    <string name="transformer_team_decepticons">Decepticons</string>
 
     <string name="battle_start">Start Battle</string>
 </resources>

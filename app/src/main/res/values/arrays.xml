@@ -1,6 +1,6 @@
 <resources>
     <string-array name="transformer_teams">
-        <item>Autobots</item>
-        <item>Decepticons</item>
+        <item>@string/transformer_team_autobots</item>
+        <item>@string/transformer_team_decepticons</item>
     </string-array>
 </resources>

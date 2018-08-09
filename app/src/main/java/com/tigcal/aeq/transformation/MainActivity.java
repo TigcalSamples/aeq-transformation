@@ -4,15 +4,29 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+import com.tigcal.aeq.transformation.adapter.TransformerAdapter;
+import com.tigcal.aeq.transformation.model.Transformer;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity implements AddTransformerFragment.AddTransformerListener {
 
     private RecyclerView recyclerView;
+    private TextView emptyTransformersText;
+
+    private TransformerAdapter transformerAdapter;
+
+    private List<Transformer> transformers = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +44,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        emptyTransformersText = findViewById(R.id.list_empty_text);
+
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), layoutManager.getOrientation());
+        recyclerView.addItemDecoration(dividerItemDecoration);
+
+        transformerAdapter = new TransformerAdapter(this, transformers, new TransformerAdapter.OnClickListener() {
+            @Override
+            public void onClick(int index) {
+                //TODO remove
+            }
+        });
+        recyclerView.setAdapter(transformerAdapter);
     }
 
     @Override
@@ -57,4 +87,13 @@ public class MainActivity extends AppCompatActivity {
         addTransformerDialog.show(getSupportFragmentManager(), getString(R.string.transformer_add));
     }
 
+    @Override
+    public void addTransformer(Transformer transformer) {
+        transformers.add(transformer);
+        transformerAdapter.notifyItemInserted(transformers.size() - 1);
+
+        emptyTransformersText.setVisibility(View.INVISIBLE);
+
+        Snackbar.make(recyclerView, getString(R.string.transformer_add_success, transformer.getName()), Snackbar.LENGTH_SHORT).show();
+    }
 }
