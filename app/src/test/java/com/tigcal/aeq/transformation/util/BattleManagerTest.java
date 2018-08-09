@@ -17,4 +17,24 @@ public class BattleManagerTest {
         int battleResult = BattleManager.startBattle(optimus, predaking);
         assertEquals(BattleManager.Result.END, battleResult);
     }
+
+    @Test
+    public void specialAutobotWins() {
+        Transformer optimus = new Transformer();
+        optimus.setName("Optimus Prime");
+        Transformer decepticon = new Transformer();
+        decepticon.setName("Soundwave");
+        int battleResult = BattleManager.startBattle(optimus, decepticon);
+        assertEquals(BattleManager.Result.AUTOBOT_WINS, battleResult);
+    }
+
+    @Test
+    public void specialDecepticonWins() {
+        Transformer optimus = new Transformer();
+        optimus.setName("Bumblebee");
+        Transformer decepticon = new Transformer();
+        decepticon.setName("Predaking");
+        int battleResult = BattleManager.startBattle(optimus, decepticon);
+        assertEquals(BattleManager.Result.DECEPTICON_WINS, battleResult);
+    }
 }

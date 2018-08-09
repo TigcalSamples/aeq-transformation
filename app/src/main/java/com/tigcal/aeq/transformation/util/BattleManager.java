@@ -26,6 +26,10 @@ public class BattleManager {
     public static @Result int startBattle(Transformer autobot, Transformer decepticon) {
         if(autobot.isSpecial() && decepticon.isSpecial()) {
             return Result.END;
+        } else if(autobot.isSpecial()) {
+            return Result.AUTOBOT_WINS;
+        } else if(decepticon.isSpecial()) {
+            return Result.DECEPTICON_WINS;
         }
 
         return Result.DRAW;//FIXME

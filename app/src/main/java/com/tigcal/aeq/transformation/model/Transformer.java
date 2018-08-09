@@ -7,8 +7,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 public class Transformer implements Comparable<Transformer> {
-    private static final String SPECIAL_OPTIMUS = "Optimus Prime";
-    private static final String SPECIAL_PREDAKING = "Predaking";
+    private static final String SPECIAL_OPTIMUS = "OPTIMUS PRIME";
+    private static final String SPECIAL_PREDAKING = "PREDAKING";
 
     @IntDef({Team.AUTOBOTS, Team.DECEPTICONS})
     @Retention(RetentionPolicy.SOURCE)
@@ -116,7 +116,7 @@ public class Transformer implements Comparable<Transformer> {
     }
 
     public boolean isSpecial() {
-        return SPECIAL_OPTIMUS.equals(name) || SPECIAL_PREDAKING.equals(name);
+        return SPECIAL_OPTIMUS.equals(name.toUpperCase()) || SPECIAL_PREDAKING.equals(name.toUpperCase());
     }
 
     public void setTeam(@Team int team) {
