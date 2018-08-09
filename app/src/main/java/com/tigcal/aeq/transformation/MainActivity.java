@@ -107,7 +107,10 @@ public class MainActivity extends AppCompatActivity implements AddTransformerFra
             }
         }
 
-        //TODO check: there must be at least 1 per "team"
+        if (autobots.isEmpty() || decepticons.isEmpty()) {
+            Snackbar.make(recyclerView, getString(R.string.battle_no_opponents), Snackbar.LENGTH_SHORT).show();
+            return;
+        }
 
         Collections.sort(autobots);
         Collections.sort(decepticons);

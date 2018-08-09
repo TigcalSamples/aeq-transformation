@@ -27,6 +27,7 @@
     <string name="transformer_team_decepticons">Decepticons</string>
 
     <string name="battle_start">Start Battle</string>
+    <string name="battle_no_opponents">There must be at least one Transformer from Autobots and one Transformer from Decepticons</string>
     <string name="battle_immediate_end">All transformers were destroyed</string>
     <string name="battle_number">%d battles</string>
     <string name="battle_winners_autobots">Winning team (Autobots): %s</string>
