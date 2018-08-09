@@ -58,7 +58,12 @@ public class MainActivity extends AppCompatActivity implements AddTransformerFra
         transformerAdapter = new TransformerAdapter(this, transformers, new TransformerAdapter.OnClickListener() {
             @Override
             public void onClick(int index) {
-                //TODO remove
+                transformers.remove(index);
+                transformerAdapter.notifyItemRemoved(index);
+                transformerAdapter.notifyItemRangeChanged(index, transformers.size());
+                if (transformers.isEmpty()) {
+                    emptyTransformersText.setVisibility(View.VISIBLE);
+                }
             }
         });
         recyclerView.setAdapter(transformerAdapter);

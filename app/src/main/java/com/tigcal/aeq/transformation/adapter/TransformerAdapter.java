@@ -79,12 +79,20 @@ public class TransformerAdapter extends RecyclerView.Adapter<TransformerAdapter.
         ImageView icon;
         TextView nameText;
         TextView statText;
+        ImageView removeImage;
 
         ViewHolder(View itemView) {
             super(itemView);
             icon = itemView.findViewById(R.id.transformer_icon);
             nameText = itemView.findViewById(R.id.transformer_name_text);
             statText = itemView.findViewById(R.id.transformer_stat_text);
+            removeImage = itemView.findViewById(R.id.remove_button);
+            removeImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    clickListener.onClick(getAdapterPosition());
+                }
+            });
         }
     }
 
