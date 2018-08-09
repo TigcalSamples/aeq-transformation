@@ -3,5 +3,8 @@
 
     <string name="transformers_list_empty">Add Transformers for the battle.</string>
 
+    <string name="transformer_icon">Transformers Icon</string>
+    <string name="transformer_remove">Remove Transformer</string>
+
     <string name="battle_start">Start Battle</string>
 </resources>
