@@ -1,0 +1,6 @@
+<resources>
+    <string-array name="transformer_teams">
+        <item>Autobots</item>
+        <item>Decepticons</item>
+    </string-array>
+</resources>

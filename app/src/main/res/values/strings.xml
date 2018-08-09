@@ -3,6 +3,19 @@
 
     <string name="transformers_list_empty">Add Transformers for the battle.</string>
 
+    <string name="transformer_name">Name</string>
+    <string name="transformer_team">Team</string>
+    <string name="transformer_strength">Strength</string>
+    <string name="transformer_intelligence">Intelligence</string>
+    <string name="transformer_speed">Speed</string>
+    <string name="transformer_endurance">Endurance</string>
+    <string name="transformer_rank">Rank</string>
+    <string name="transformer_courage">Courage</string>
+    <string name="transformer_firepower">Firepower</string>
+    <string name="transformer_skill">Skill</string>
+
+    <string name="transformer_add">Add A Transformer</string>
+    <string name="transformer_criteria_min">0</string>
     <string name="transformer_icon">Transformers Icon</string>
     <string name="transformer_remove">Remove Transformer</string>
 
