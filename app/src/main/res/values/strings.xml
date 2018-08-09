@@ -27,4 +27,6 @@
     <string name="transformer_team_decepticons">Decepticons</string>
 
     <string name="battle_start">Start Battle</string>
+    <string name="battle_immediate_end">All transformers were destroyed</string>
+    <string name="battle_message_ok">Okay</string>
 </resources>

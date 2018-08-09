@@ -1,8 +1,10 @@
 package com.tigcal.aeq.transformation;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,8 +17,10 @@ import android.widget.TextView;
 
 import com.tigcal.aeq.transformation.adapter.TransformerAdapter;
 import com.tigcal.aeq.transformation.model.Transformer;
+import com.tigcal.aeq.transformation.util.BattleManager;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements AddTransformerFragment.AddTransformerListener {
@@ -79,8 +83,7 @@ public class MainActivity extends AppCompatActivity implements AddTransformerFra
     public boolean onOptionsItemSelected(MenuItem item) {
         switch ((item.getItemId())) {
             case R.id.action_battle:
-                //TODO battle
-                Snackbar.make(recyclerView, "TODO: Start Battle", Snackbar.LENGTH_SHORT).show();
+                startBattle();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -90,6 +93,56 @@ public class MainActivity extends AppCompatActivity implements AddTransformerFra
     private void displayAddTransformerDialog() {
         AddTransformerFragment addTransformerDialog = new AddTransformerFragment();
         addTransformerDialog.show(getSupportFragmentManager(), getString(R.string.transformer_add));
+    }
+
+    private void startBattle() {
+        List<Transformer> autobots = new ArrayList<>();
+        List<Transformer> decepticons = new ArrayList<>();
+        for (Transformer transformer : transformers) {
+            if (transformer.isAutobot()) {
+                autobots.add(transformer);
+            } else {
+                decepticons.add(transformer);
+            }
+        }
+
+        //TODO check: there must be at least 1 per "team"
+
+        Collections.sort(autobots);
+        Collections.sort(decepticons);
+        battle(autobots, decepticons);
+    }
+
+    private void battle(List<Transformer> autobots, List<Transformer> decepticons) {
+        int battles = Math.min(autobots.size(), decepticons.size());
+        for (int i = 0; i < battles; i++) {
+            int result = BattleManager.startBattle(autobots.get(i), decepticons.get(i));
+            if (result == BattleManager.Result.END) {
+                displayImmediateBattleEndMessage();
+                break;
+            }
+            //TODO draw, autobot/decepticon win
+        }
+        //TODO count  wins, eliminated
+    }
+
+    private void displayImmediateBattleEndMessage() {
+        displayMessage(getString(R.string.battle_immediate_end));
+    }
+
+    private void displayMessage(String message) {
+        new AlertDialog.Builder(this)
+                .setTitle(getString(R.string.app_name))
+                .setMessage(message)
+                .setPositiveButton(getString(R.string.battle_message_ok), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                })
+                .create()
+                .show();
+        ;
     }
 
     @Override
