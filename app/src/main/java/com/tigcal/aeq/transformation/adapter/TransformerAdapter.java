@@ -34,7 +34,7 @@ public class TransformerAdapter extends RecyclerView.Adapter<TransformerAdapter.
     public void onBindViewHolder(TransformerAdapter.ViewHolder holder, final int position) {
         final Transformer transformer = transformers.get(position);
 
-        if(transformer.isAutobot()) {
+        if (transformer.isAutobot()) {
             holder.icon.setImageResource(R.drawable.ic_autobots);
         } else {
             holder.icon.setImageResource(R.drawable.ic_decepticons);
@@ -66,7 +66,7 @@ public class TransformerAdapter extends RecyclerView.Adapter<TransformerAdapter.
         statsBuilder.append(transformer.getFirepower());
         statsBuilder.append("; ");
         statsBuilder.append("Skill: ");
-        statsBuilder.append(transformer.getStrength());
+        statsBuilder.append(transformer.getSkill());
         holder.statText.setText(statsBuilder.toString());
     }
 
