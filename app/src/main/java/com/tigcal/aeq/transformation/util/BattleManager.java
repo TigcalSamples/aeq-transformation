@@ -23,12 +23,19 @@ public class BattleManager {
      *
      * @return BattleManager.Result
      */
-    public static @Result int startBattle(Transformer autobot, Transformer decepticon) {
-        if(autobot.isSpecial() && decepticon.isSpecial()) {
+    public static @Result
+    int startBattle(Transformer autobot, Transformer decepticon) {
+        if (autobot.isSpecial() && decepticon.isSpecial()) {
             return Result.END;
-        } else if(autobot.isSpecial()) {
+        } else if (autobot.isSpecial()) {
             return Result.AUTOBOT_WINS;
-        } else if(decepticon.isSpecial()) {
+        } else if (decepticon.isSpecial()) {
+            return Result.DECEPTICON_WINS;
+        } else if (autobot.getCourage() - decepticon.getCourage() >= 4
+                && autobot.getStrength() - decepticon.getStrength() >= 3) {
+            return Result.AUTOBOT_WINS;
+        } else if (decepticon.getCourage() - autobot.getCourage() >= 4
+                && decepticon.getStrength() - autobot.getStrength() >= 3) {
             return Result.DECEPTICON_WINS;
         }
 

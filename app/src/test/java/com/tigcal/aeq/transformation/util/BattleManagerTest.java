@@ -30,11 +30,27 @@ public class BattleManagerTest {
 
     @Test
     public void specialDecepticonWins() {
-        Transformer optimus = new Transformer();
-        optimus.setName("Bumblebee");
+        Transformer autobot = new Transformer();
+        autobot.setName("Bumblebee");
         Transformer decepticon = new Transformer();
         decepticon.setName("Predaking");
-        int battleResult = BattleManager.startBattle(optimus, decepticon);
+        int battleResult = BattleManager.startBattle(autobot, decepticon);
         assertEquals(BattleManager.Result.DECEPTICON_WINS, battleResult);
     }
+
+    @Test
+    public void courage4Strength3Wins() {
+        Transformer autobot = new Transformer();
+        autobot.setName("Bumblebee");
+        autobot.setCourage(7);
+        autobot.setStrength(6);
+        Transformer decepticon = new Transformer();
+        decepticon.setName("Soundwave");
+        decepticon.setCourage(3);
+        decepticon.setStrength(2);
+        int battleResult = BattleManager.startBattle(autobot, decepticon);
+        assertEquals(BattleManager.Result.AUTOBOT_WINS, battleResult);
+    }
+
+
 }
