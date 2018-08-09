@@ -154,36 +154,43 @@ public class MainActivity extends AppCompatActivity implements AddTransformerFra
 
     private void displayAutobotsWonMessage(int battles, List<Transformer> autobots, List<Transformer> decepticons) {
         StringBuilder message = new StringBuilder();
-        //TODO 1 battles -> 1 battle
-        message.append(getString(R.string.battle_number, battles));
+        message.append(getResources().getQuantityString(R.plurals.battle_number, battles, battles));
         message.append("\n");
-        message.append(getString(R.string.battle_winners_autobots, getSurvivors(autobots)));
+        message.append(getString(R.string.battle_winners_autobots, TextUtils.join(",", getSurvivors(autobots))));
         message.append("\n");
-        message.append(getString(R.string.battle_loser_decepticon_survivors, getSurvivors(decepticons)));
-        //TODO no survivors
+        List<String> survivors = getSurvivors(decepticons);
+        if (survivors.isEmpty()) {
+            message.append(getString(R.string.battle_loser_decepticon_no_survivors));
+        } else {
+            message.append(getString(R.string.battle_loser_decepticon_survivors, TextUtils.join(",", survivors)));
+        }
         displayMessage(message.toString());
     }
 
     private void displayDecepticonsWonMessage(int battles, List<Transformer> autobots, List<Transformer> decepticons) {
         StringBuilder message = new StringBuilder();
-        //TODO 1 battles -> 1 battle
-        message.append(getString(R.string.battle_number, battles));
+
+        message.append(getResources().getQuantityString(R.plurals.battle_number, battles, battles));
         message.append("\n");
-        message.append(getString(R.string.battle_winners_decepticons, getSurvivors(decepticons)));
+        message.append(getString(R.string.battle_winners_decepticons, TextUtils.join(",", getSurvivors(decepticons))));
         message.append("\n");
-        message.append(getString(R.string.battle_loser_autobots_survivors, getSurvivors(autobots)));
-        //TODO no survivors
+        List<String> survivors = getSurvivors(autobots);
+        if (survivors.isEmpty()) {
+            message.append(getString(R.string.battle_loser_autobots_no_survivors));
+        } else {
+            message.append(getString(R.string.battle_loser_autobots_survivors, TextUtils.join(",", survivors)));
+        }
         displayMessage(message.toString());
     }
 
-    private String getSurvivors(List<Transformer> transformers) {
+    private List<String> getSurvivors(List<Transformer> transformers) {
         List<String> transformersAlive = new ArrayList<>();
         for (Transformer transformer : transformers) {
             if (transformer.isAlive()) {
                 transformersAlive.add(transformer.getName());
             }
         }
-        return TextUtils.join(",", transformersAlive);
+        return transformersAlive;
     }
 
     private void displayMessage(String message) {
