@@ -28,5 +28,11 @@
 
     <string name="battle_start">Start Battle</string>
     <string name="battle_immediate_end">All transformers were destroyed</string>
+    <string name="battle_number">%d battles</string>
+    <string name="battle_winners_autobots">Winning team (Autobots): %s</string>
+    <string name="battle_winners_decepticons">Winning team (Decepticons): %s</string>
+    <string name="battle_loser_autobots_survivors">Survivors from the losing team (Autobots): %s </string>
+    <string name="battle_loser_decepticon_survivors">Survivors from the losing team (Decepticons): %s </string>
+    <string name="battle_tie">The battle ended in a tie</string>
     <string name="battle_message_ok">Okay</string>
 </resources>

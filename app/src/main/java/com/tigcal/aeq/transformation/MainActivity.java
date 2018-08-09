@@ -10,6 +10,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -114,20 +115,72 @@ public class MainActivity extends AppCompatActivity implements AddTransformerFra
     }
 
     private void battle(List<Transformer> autobots, List<Transformer> decepticons) {
+        int autobotsWin = 0;
+        int decepticonsWin = 0;
+
         int battles = Math.min(autobots.size(), decepticons.size());
         for (int i = 0; i < battles; i++) {
             int result = BattleManager.startBattle(autobots.get(i), decepticons.get(i));
             if (result == BattleManager.Result.END) {
                 displayImmediateBattleEndMessage();
                 break;
+            } else if (result == BattleManager.Result.DRAW) {
+                autobots.get(i).die();
+                decepticons.get(i).die();
+            } else if (result == BattleManager.Result.AUTOBOT_WINS) {
+                autobotsWin++;
+                decepticons.get(i).die();
+            } else if (result == BattleManager.Result.DECEPTICON_WINS) {
+                decepticonsWin++;
+                autobots.get(i).die();
             }
-            //TODO draw, autobot/decepticon win
         }
-        //TODO count  wins, eliminated
+
+        if (autobotsWin > decepticonsWin) {
+            displayAutobotsWonMessage(battles, autobots, decepticons);
+        } else if (decepticonsWin > autobotsWin) {
+            displayDecepticonsWonMessage(battles, autobots, decepticons);
+        } else {
+            displayMessage(getString(R.string.battle_tie));
+        }
     }
 
     private void displayImmediateBattleEndMessage() {
         displayMessage(getString(R.string.battle_immediate_end));
+    }
+
+    private void displayAutobotsWonMessage(int battles, List<Transformer> autobots, List<Transformer> decepticons) {
+        StringBuilder message = new StringBuilder();
+        //TODO 1 battles -> 1 battle
+        message.append(getString(R.string.battle_number, battles));
+        message.append("\n");
+        message.append(getString(R.string.battle_winners_autobots, getSurvivors(autobots)));
+        message.append("\n");
+        message.append(getString(R.string.battle_loser_decepticon_survivors, getSurvivors(decepticons)));
+        //TODO no survivors
+        displayMessage(message.toString());
+    }
+
+    private void displayDecepticonsWonMessage(int battles, List<Transformer> autobots, List<Transformer> decepticons) {
+        StringBuilder message = new StringBuilder();
+        //TODO 1 battles -> 1 battle
+        message.append(getString(R.string.battle_number, battles));
+        message.append("\n");
+        message.append(getString(R.string.battle_winners_decepticons, getSurvivors(decepticons)));
+        message.append("\n");
+        message.append(getString(R.string.battle_loser_autobots_survivors, getSurvivors(autobots)));
+        //TODO no survivors
+        displayMessage(message.toString());
+    }
+
+    private String getSurvivors(List<Transformer> transformers) {
+        List<String> transformersAlive = new ArrayList<>();
+        for (Transformer transformer : transformers) {
+            if (transformer.isAlive()) {
+                transformersAlive.add(transformer.getName());
+            }
+        }
+        return TextUtils.join(",", transformersAlive);
     }
 
     private void displayMessage(String message) {

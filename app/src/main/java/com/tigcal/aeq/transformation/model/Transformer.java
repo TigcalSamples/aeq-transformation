@@ -133,6 +133,7 @@ public class Transformer implements Comparable<Transformer> {
 
     @Override
     public int compareTo(@NonNull Transformer transformer) {
-        return this.rank - transformer.rank;
+        //Sorts rank from higher to lower
+        return transformer.rank - this.rank;
     }
 }
