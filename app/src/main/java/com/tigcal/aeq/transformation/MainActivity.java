@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements AddTransformerFra
             int result = BattleManager.startBattle(autobots.get(i), decepticons.get(i));
             if (result == BattleManager.Result.END) {
                 displayImmediateBattleEndMessage();
-                break;
+                return;
             } else if (result == BattleManager.Result.DRAW) {
                 autobots.get(i).die();
                 decepticons.get(i).die();
